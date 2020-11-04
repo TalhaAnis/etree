@@ -219,15 +219,27 @@ func escapeString(w *bufio.Writer, s string, m escapeMode) {
 		i += width
 		switch r {
 		case '&':
+			if m == escapeCanonicalText {
+				continue
+			}
 			esc = []byte("&amp;")
 		case '<':
+			if m == escapeCanonicalText {
+				continue
+			}
 			esc = []byte("&lt;")
 		case '>':
+			if m == escapeCanonicalText {
+				continue
+			}
 			if m == escapeCanonicalAttr {
 				continue
 			}
 			esc = []byte("&gt;")
 		case '\'':
+			if m == escapeCanonicalText {
+				continue
+			}
 			if m != escapeNormal {
 				continue
 			}
