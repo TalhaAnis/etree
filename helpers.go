@@ -224,8 +224,14 @@ func escapeString(w *bufio.Writer, s string, m escapeMode) {
 			}
 			esc = []byte("&amp;")
 		case '<':
+			if m == escapeCanonicalText {
+				continue
+			}
 			esc = []byte("&lt;")
 		case '>':
+			if m == escapeCanonicalText {
+				continue
+			}
 			if m == escapeCanonicalAttr {
 				continue
 			}

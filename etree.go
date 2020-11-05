@@ -944,7 +944,9 @@ func (e *Element) indent(depth int, indent indentFunc) {
 			if !firstNonCharData || depth > 0 {
 				s := indent(depth)
 				if s != "" {
-					newCharData(s, whitespaceFlag, e)
+					if e.Tag != "source" && e.Tag != "target" {
+						newCharData(s, whitespaceFlag, e)
+					}
 				}
 			}
 			firstNonCharData = false
